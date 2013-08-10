@@ -30,10 +30,6 @@
 			?>setTimeout(function(){
 				hideAll("music");
 			}, 100); <?
-		} else if($_GET['sort']=="n"){
-			?>setTimeout(function(){
-				hideAll("notes");
-			}, 100); <?
 		} else {
 			?>hideAll("urls", 1);<?
 		}
@@ -57,7 +53,7 @@
 	<div id='messages'><? echo $message?></div>
 	<div id='header'></div>
 		<div id="nav">
-			<div style="position:fixed;top:0px;"><a id='off' href="#">@</a><a id='onn' href="#">@</a></div>
+			<div style="position:fixed;"><a id='off' href="#">@</a><a id='onn' href="#">@</a></div>
 			<div id="menu">
 				<a class='tabs' href='../url/' id='logo'>U</a><a class='tabs' href='#' id='urls'>Links</a><a class='tabs' href='#' id='music'>Music</a><a class='tabs' href='#' id='notes'>Notes</a><a class='tabs' href='#' id='images' style='text-decoration: line-through;'>Images</a><a class='tabs' href="#" id='add'>+</a><a class='tabs' href="#" id='logout'>-</a>
 			</div>
@@ -87,10 +83,10 @@
 						$uid 	= $row['id'];
 						$utitle = $row['title'];
 						$usrc	= $row['src'];
-						$t = "t";
+
 						echo "
 						<ul>
-							<li><a class='links' href=$usrc>$utitle</a> | <a class='deleted' onclick='del($uid, $t)' href='#'>[delete]</a></li>
+							<li><a class='links' href=$usrc>$utitle</a> | <a class='deleted' onclick='del($uid)' href='#'>[delete]</a></li>
 						</ul>";
 					}
 				?>
@@ -120,7 +116,6 @@
 						if(mysql_num_rows($qmusic)==0)
 							echo "Go to the (+) tab and add some songs!";
 
-						$t = "m";
 						while ($row = mysql_fetch_assoc($qmusic)) {
 							$mid 	= $row['id'];
 							$mtitle = $row['title'];
@@ -137,7 +132,7 @@
 								<td class='c'><a target='_blank' href='http://www.youtube.com/results?search_query=$mtitle+$msrc'><img class='songs' src='images/youtube.jpg' /></a></td>
 								<td class='c'><a target='_blank' href='https://www.google.com/#q=$mtitle+$msrc+download'><img height='16px' class='songs' src='images/google.jpg' /></a></td>
 								<td class='c'><a target='_blank' href='http://mp3skull.com/mp3/".$msrc."_".$mtitle.".html'><img height='16px' class='songs' src='images/skull.png' /></a></td>
-								<td class='c'><a class='deleted' onclick='del($mid, $t);' href='#'>X</a></td>
+								<td class='c'><a class='deleted' onclick='del($mid);' href='#'>X</a></td>
 							</tr>
 							";
 						}
@@ -153,8 +148,6 @@
 						$qnotes = mysql_query("SELECT * FROM `mystuff` WHERE `type` = 'notes' ORDER BY `id` DESC");
 						if(mysql_num_rows($qnotes)==0)
 							echo "Go to the (+) tab and add some notes!";
-
-						$t = "n";
 						while ($row = mysql_fetch_assoc($qnotes)) {
 							$nid 	= $row['id'];
 							$ntitle = $row['title'];
@@ -164,7 +157,7 @@
 
 							echo "
 							<div class='notesTitle' id='txt$nid'>
-							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid, $t)'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
+							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid)'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
 							</div>
 							<div class='notesContent' id='txt".$nid."content' style='visibility: hidden; height:0px;'>$nsrc</div>
 							";

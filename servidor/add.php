@@ -21,8 +21,7 @@ if($_POST['submit']){
 		require('connect.php');
 
 		mysql_query("INSERT INTO `mystuff` (`id`, `title`, `src`, `type`, `datetime`) VALUES (NULL, '$title', '$src', '$type', '$fecha')");
-		$type = substr($type, 0, 1);
-		header("Location: ../../url/?sort=$type");
+		header("Location: ../../url/?m=$type");
 	} else {
 		Header("Location: ../../url/?m=e");
 	}

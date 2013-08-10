@@ -62,9 +62,15 @@ function hideAll(div, n){
 	$('#myimages').fadeOut(time);
 	$('#myadd').fadeOut(time);
 
+	//$('#urls').css("border-bottom","2px solid #EBEBEB");
+	//$('#music').css("border-bottom","2px solid #EBEBEB");
+	//$('#notes').css("border-bottom","2px solid #EBEBEB");
+	//$('#images').css("border-bottom","2px solid #EBEBEB");
+	//$('#add').css("border-bottom","2px solid #EBEBEB");
 
 	var name = "#my"+div;
 	div = "#"+div;
+	//$(div).css("border-bottom","2px solid gray");
 	setTimeout(function(){
 		$(name).fadeIn(time);
 	}, time2);
@@ -80,14 +86,11 @@ function away(id) {
 	$(name).css("visibility", "hidden");
 	$(name).css("height", "0px");
 }
-function del(div_id, type){
-	$.post("servidor/del.php", {id: div_id, deleted: "yes", t: type}, function(data){
-		var url = "../url/?m=del&sort="data.typee;
-		if(data.message=="success")
-			document.location.href=url;
-		else
-			document.location.href='../url/?m=e';
-	}, json);
+function del(div_id){
+	$.post("servidor/del.php", {id: div_id, deleted: "yes"}, function(data){
+		if(data=="success")
+			document.location.href='../url/?m=del';
+	});
 }
 
 function srting (sort, item) {
