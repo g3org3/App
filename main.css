@@ -1,0 +1,291 @@
+body {
+	text-align: center;
+	font-family: lucida sans unicode;
+}
+
+#nav {
+	padding-top: 10px;
+	text-align: left;
+	margin:0px auto;
+}
+#menu {
+	text-align: center;
+	padding: 1px 0px 0px 0px;
+}
+a#off, a#onn {
+	color: #CCC;
+	text-decoration: none;
+}
+a.links:link, a.links:visited {
+	color: blue;
+	text-decoration: none;
+}
+a.links:hover {
+	text-decoration: underline;
+}
+#myadd {
+	text-align: center;
+}
+#mymusic table {
+	width: 100%;
+	padding-right: 2px;
+}
+#mymusic table tr{
+	border: none;
+}
+#mymusic table td {
+	text-align: left;
+	padding-left: 10px;
+}
+#mymusic table tr td.c, #mymusic table tr.d td {
+	text-align: center;
+}
+
+img.songs {
+	padding: 3px 0px 0px 0px;
+}
+
+.notesTitle {
+	margin-top: 10px;
+	padding: 3px 0px 0px 5px;
+	background: #F5F5F5;
+	cursor: pointer;
+	height: 30px;
+}
+.notesContent {
+	padding-left: 5px;
+	border: 1px solid #EBEBEB;
+	margin: 0px auto;
+	width: 97%;
+	z-index: -1;
+}
+.ntstitle {
+	width: 70%;
+	float: left;
+}
+.ntsdate {
+	float: right;
+	font-size: 12px;
+	width: 15%;
+}
+.ntshide{
+	padding-right:10px;
+	font-size:12px; 
+	float:left; 
+	width:5%;
+	color:#999;
+}
+.ntsdel{
+	padding-right:10px;
+	font-size:12px; 
+	float:left; 
+	width:5%;
+	color:#999;
+}
+input.txt {
+	border: 1px solid #ccc;
+	padding: 5px;
+	font-family: lucida sans unicode;
+	font-size: 17px;
+}
+table tr.d td {
+	color: white;
+	font-weight: bold;
+}
+a.deleted:active, a.rm:visited {
+	color: blue;
+	text-decoration: none;
+}
+
+
+@media screen and (max-width: 999px){
+    /*--- iPhone only CSS here ---*/
+	#myurls, #mymusic, #myimages, #mynotes, #myadd {
+		border: 1px solid #999;
+	}
+a.tabs:link, a.tabs:visited {
+	color: #137ACF;
+	text-decoration: none;
+	font-weight: bold;
+	font-family: lucida sans unicode;
+	padding: 0px 10px 0px 10px;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+}
+a.tabs:hover {
+	background: #DBEFFF;
+}
+#nav {
+	width: 100%;
+}
+.ntsdate {
+	visibility: hidden;
+}
+
+
+}
+@media screen and (max-width: 999px) and (orientation : portrait){
+    /*--- iPhone only CSS here ---*/
+	#myurls, #mymusic, #myimages, #mynotes, #myadd {
+		height: 420px;
+	}
+	table tr td#del { width: 0%;}
+	table tr td {
+		padding-right: 5px;
+	}
+
+}
+@media screen and (max-width: 999px) and (orientation : landscape){
+    /*--- iPhone only CSS here ---*/
+	#myurls, #mymusic, #myimages, #mynotes, #myadd {
+		height: 270px;
+	}
+}
+@media screen and (min-width: 1000px) {
+    /*--- browser only CSS here ---*/
+	#myurls, #mymusic, #myimages, #mynotes, #myadd {
+		border: none;
+		min-height: 200px;
+		height: auto;
+		margin-top: 50px;
+		z-index: -2;
+	}
+	#nav {width: 1000px;}
+	#menu {
+		margin-top: -18px;
+		padding-bottom: 5px;
+	}
+	a.tabs:link, a.tabs:visited {
+		color: #000;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 30px;
+		font-family: lucida sans unicode;
+		padding: 0px 10px 0px 10px;
+		border-top: none;
+		border-bottom: 2px solid #EBEBEB;
+		border-left: 1px solid #ccc;
+	}
+	a.tabs:hover {
+		border-bottom: 2px solid #EBEBEB;
+		background-image: none;
+	}
+	a#urls:hover, a#music:hover, a#notes:hover, a#images:hover, a#add:hover, a#logout:hover, a#logo:hover {
+		color: #0D358C;
+		background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, rgb(250,250,250)),
+			color-stop(0.84, rgb(235,235,235))
+		);
+		-webkit-transition: background-image .5s ease;
+	}
+
+
+	a#urls:hover {border-bottom: 2px solid #00aeff;}
+	a#music:hover {border-bottom: 2px solid #1BE042;}
+	a#notes:hover {border-bottom: 2px solid #EBEB42;}
+	a#images:hover {border-bottom: 2px solid #E0771B;}
+	a#add:hover {border-bottom: 2px solid #292923;}
+	a#logout:hover {border-bottom: 2px solid #fff;}
+	a#logo:hover {border-bottom: 2px solid brown;}
+
+	.ntsdate {
+		color: #999;	
+	}
+
+
+	#header {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		background-image: -webkit-gradient(
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, rgb(235,235,235)),
+			color-stop(0.84, rgb(250,250,250))
+		);
+		height: 49px;
+		z-index: -1;
+		border-bottom: 1px solid #ccc;
+		-webkit-box-shadow: 0px 0px 20px #999;
+	}
+	#messages {
+		color: white;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 50px;
+		font-weight: bold;
+		font-size: 30px;
+		background: rgba(0, 0, 0, 0.8);
+	}
+
+	input {
+		outline: none;
+	}
+
+	input.txt {
+		width: 500px;
+	}
+	select option {
+		font-family: lucida sans unicode;
+
+	}
+	select {
+		width: 200px;
+	}
+	input.smt {
+
+	}
+	#mynotes, #myurls, #myimages {
+		padding-top: 40px;
+		width: 600px;
+		margin: 0px auto;
+	}
+	.notesTitle {
+		padding: 3px 0px 0px 5px;
+		background-image: -webkit-linear-gradient(bottom, rgb(224,224,224) 0%, rgb(245,245,245) 100%);
+		cursor: pointer;
+		height: 30px;
+		-webkit-box-shadow: 0px 0px 10px #ccc;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
