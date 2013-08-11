@@ -5,11 +5,11 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" /> 
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<meta name="viewport" content="minimum-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
-		<title>Utility [alpha]</title>
+		<title>Home</title>
 
-		<link rel="stylesheet" type="text/css" href="main.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
 
@@ -29,6 +29,10 @@
 		if($_GET['sort']=="m"){
 			?>setTimeout(function(){
 				hideAll("music");
+			}, 100); <?
+		} else if($_GET['sort']=="n"){
+			?>setTimeout(function(){
+				hideAll("notes");
 			}, 100); <?
 		} else {
 			?>hideAll("urls", 1);<?
@@ -53,11 +57,11 @@
 	<div id='messages'><? echo $message?></div>
 	<div id='header'></div>
 		<div id="nav">
-			<div style="position:fixed;"><a id='off' href="#">@</a><a id='onn' href="#">@</a></div>
+			<div style="position:fixed;top:0px;"><a id='off' href="#">&and;</a><a id='onn' href="#">&or;</a></div>
 			<div id="menu">
-				<a class='tabs' href='../url/' id='logo'>U</a><a class='tabs' href='#' id='urls'>Links</a><a class='tabs' href='#' id='music'>Music</a><a class='tabs' href='#' id='notes'>Notes</a><a class='tabs' href='#' id='images' style='text-decoration: line-through;'>Images</a><a class='tabs' href="#" id='add'>+</a><a class='tabs' href="#" id='logout'>-</a>
+				<a class='tabs' href='../url/' id='logo'>&bull;</a><a class='tabs' href='#' id='urls'>Links</a><a class='tabs' href='#' id='music'>Music</a><a class='tabs' href='#' id='notes'>Notes</a><a class='tabs' href='#' id='images' style='text-decoration: line-through;'>Images</a><a class='tabs' href="#" id='add'>+</a><a class='tabs' href="#" id='logout'>-</a>
 			</div>
-
+			<div id='space'></div>
 			<div id="myadd">
 				<form action='servidor/add.php' method='post'>
 					<input name='title' class="txt" placeholder='Title' /><br>
@@ -83,11 +87,11 @@
 						$uid 	= $row['id'];
 						$utitle = $row['title'];
 						$usrc	= $row['src'];
-
+						$t 		= "u";
 						echo "
-						<ul>
-							<li><a class='links' href=$usrc>$utitle</a> | <a class='deleted' onclick='del($uid)' href='#'>[delete]</a></li>
-						</ul>";
+						<div>
+							<a style='color:red;text-decoration:none;background:#EBEBEB;padding: 0px 5px 0px 5px; -webkit-border-radius:100px;' onclick='del($uid, $t)' href='#'>x</a> <a class='links' href=$usrc>$utitle</a>
+						</div>";
 					}
 				?>
 			</div>
@@ -97,12 +101,12 @@
 			<div id="mymusic">
 				<table cellspacing="0">
 					<tr class='d'>
+						<td width="5%" id='del' style="background-image: -webkit-linear-gradient(bottom, rgb(191,135,52) 0%, rgb(255,185,79) 100%);">-</td>
 						<td width="40%" onClick="srting('m','t');" style="background-image: -webkit-linear-gradient(bottom, rgb(169,76,181) 0%, rgb(234,112,250) 84%);">Song</td>
 						<td width="35%" onClick="srting('m', 'a');" style="background-image: -webkit-linear-gradient(bottom, rgb(36,128,36) 0%, rgb(98,204,98) 84%);">Artist</td>
 						<td width="10%" style="background-image: -webkit-linear-gradient(bottom, rgb(163,45,45) 0%, rgb(250,117,117) 84%);">Video</td>
 						<td width="5%" style="background-image: -webkit-linear-gradient(bottom, rgb(31,93,143) 0%, rgb(81,164,232) 84%);">-</td>
 						<td width="5%" style="background-image: -webkit-linear-gradient(bottom, rgb(34,89,82) 0%, rgb(81,164,153) 84%);">-</td>
-						<td width="5%" id='del' style="background-image: -webkit-linear-gradient(bottom, rgb(191,135,52) 0%, rgb(255,185,79) 100%);">-</td>
 					</tr>
 					<?
 						$x = 1;
@@ -120,19 +124,22 @@
 							$mid 	= $row['id'];
 							$mtitle = $row['title'];
 							$msrc	= $row['src'];
+							$t = "m";
 
 							$x = ($x==1)? 0: 1;
+							$color = ($x==0)? "#EBEBEB": "white";
+
 							if($x==0)
 								echo "<tr style='background:#ebebeb;'>";
 							else
 								echo "<tr style='background:#fff;'>";
 							echo "
+								<td class='c'><a style='color:red;text-decoration:none;background:".$color.";padding:0px 10px 0px 10px; -webkit-border-radius:100px;' onclick='del($mid, $t);' href='#'>X</a></td>
 								<td><a target='_blank' class='links' href='http://en.wikipedia.org/wiki/Special:Search?search=".$mtitle."&go=Go'>$mtitle</a></td>
 								<td><a target='_blank' class='links' href='http://en.wikipedia.org/wiki/Special:Search?search=".$msrc."&go=Go'>$msrc</a></td>
 								<td class='c'><a target='_blank' href='http://www.youtube.com/results?search_query=$mtitle+$msrc'><img class='songs' src='images/youtube.jpg' /></a></td>
 								<td class='c'><a target='_blank' href='https://www.google.com/#q=$mtitle+$msrc+download'><img height='16px' class='songs' src='images/google.jpg' /></a></td>
 								<td class='c'><a target='_blank' href='http://mp3skull.com/mp3/".$msrc."_".$mtitle.".html'><img height='16px' class='songs' src='images/skull.png' /></a></td>
-								<td class='c'><a class='deleted' onclick='del($mid);' href='#'>X</a></td>
 							</tr>
 							";
 						}
@@ -154,10 +161,11 @@
 							$nsrc	= $row['src'];
 							$fecha 	= $row['datetime'];
 							$fecha 	= substr($fecha, 0, 10);
+							$t = "n";
 
 							echo "
 							<div class='notesTitle' id='txt$nid'>
-							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid)'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
+							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid, $t)'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
 							</div>
 							<div class='notesContent' id='txt".$nid."content' style='visibility: hidden; height:0px;'>$nsrc</div>
 							";

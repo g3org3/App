@@ -31,9 +31,13 @@ $(document).ready(function(){
 		$('#header').slideUp(400);
 		$('#menu').slideUp(400);
 		$('#off').hide();
-		$('#onn').show();
+		setTimeout(function(){
+			$('#onn').fadeIn(400);
+		}, 400);
+		$('#space').slideUp(800);
 	});
 	$('#onn').click(function(){
+		$('#space').slideDown(800);
 		$('#header').slideDown(400);
 		$('#menu').slideDown(400);
 		$('#off').show();
@@ -86,11 +90,10 @@ function away(id) {
 	$(name).css("visibility", "hidden");
 	$(name).css("height", "0px");
 }
-function del(div_id){
-	$.post("servidor/del.php", {id: div_id, deleted: "yes"}, function(data){
-		if(data=="success")
-			document.location.href='../url/?m=del';
-	});
+function del(div_id, t){
+	$.post("servidor/del.php", {id: div_id, deleted: "yes", type:t}, function(data){
+		alert(data);
+	}, json);
 }
 
 function srting (sort, item) {

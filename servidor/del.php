@@ -3,14 +3,20 @@
 
 
 if($_POST['deleted']){
-	$id = $_POST['id'];
+	
+	$id 	= $_POST['id'];
+	$type 	= $_POST['type'];
 
 	require('connect.php');
 
 	if($q = mysql_query("DELETE FROM `mystuff` WHERE `id` = '$id'"))
-		echo "success";
+		$data['message']= "success";
+		$data['tipo']	= $type;
+		echo json_encode($data);
 	else
-		echo "error";
+		$data['message']= "fail";
+		$data['tipo']	= "none";
+		echo json_encode($data);
 
 
 } else {
