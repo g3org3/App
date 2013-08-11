@@ -91,7 +91,7 @@ function away(id) {
 	$(name).css("height", "0px");
 }
 function del(div_id, t){
-	$.post("servidor/del.php", {id: div_id, deleted: "yes", type:t}, function(data){
+	$.post("servidor/del.php", {id: div_id, deleted: "yes", typee:t}, function(data){
 		alert(data);
 	}, json);
 }
