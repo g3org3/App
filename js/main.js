@@ -90,8 +90,8 @@ function away(id) {
 	$(name).css("visibility", "hidden");
 	$(name).css("height", "0px");
 }
-function del(div_id){
-	$.post("servidor/del.php", {id: div_id, deleted: "yes"}, function(data){
+function del(div_id, div_tip){
+	$.post("servidor/del.php", {id: div_id, deleted: "yes", tipo: div_tip}, function(data){
 		if(data.message=="success")
 			document.location.href='../url/?m=del&sort='+data.tipo;
 		else

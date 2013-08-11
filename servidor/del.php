@@ -5,7 +5,7 @@
 if($_POST['deleted']){
 	
 	$id 	= $_POST['id'];
-	$tipo	= "a";
+	$tipo	= $_POST['tipo'];
 
 	require('connect.php');
 

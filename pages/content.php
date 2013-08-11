@@ -16,7 +16,7 @@
 		<?
 
 		if($_GET['m']=="del")
-			$message = "Task Deleted!";
+			$message = "Deleted!";
 		else if($_GET['m']=="mp3")
 			$message = "Song Added!";
 		else if($_GET['m']=="notes")
@@ -79,7 +79,8 @@
 
 
 			<div id="myurls">
-				<?
+				<?	
+					$tipo = "\"u\"";
 					$qurl = mysql_query("SELECT * FROM `mystuff` WHERE `type` = 'url' ORDER BY `id` DESC");
 					if(mysql_num_rows($qurl)==0)
 						echo "Go to the (+) tab and add some links!";
@@ -87,11 +88,9 @@
 						$uid 	= $row['id'];
 						$utitle = $row['title'];
 						$usrc	= $row['src'];
-						$t = "u";
-
 						echo "
 						<div>
-							<a style='color:red;text-decoration:none;background:#EBEBEB;padding: 0px 5px 0px 5px; -webkit-border-radius:100px;' onclick='del($uid);' href='#'>x</a> <a class='links' href=$usrc>$utitle</a>
+							<a style='color:red;text-decoration:none;background:#EBEBEB;padding: 0px 5px 0px 5px; -webkit-border-radius:100px;' onclick='del($uid , $tipo)'; href='#'>x</a> <a class='links' href=$usrc>$utitle</a>
 						</div>";
 					}
 				?>
@@ -111,7 +110,7 @@
 					</tr>
 					<?
 						$x = 1;
-						$t = 'm';
+						$tipo = "\"m\"";
 
 						if($_GET['sort']=="m" && $_GET['item']=="t")
 							$qmusic = mysql_query("SELECT * FROM `mystuff` WHERE `type` = 'mp3' ORDER BY `title` ASC");
@@ -136,7 +135,7 @@
 							else
 								echo "<tr style='background:#fff;'>";
 							echo "
-								<td class='c'><a style='color:red;text-decoration:none;background:".$color.";padding:0px 10px 0px 10px; -webkit-border-radius:100px;' onclick='del($mid);' href='#'>X</a></td>
+								<td class='c'><a style='color:red;text-decoration:none;background:".$color.";padding:0px 10px 0px 10px; -webkit-border-radius:100px;' onclick='del(".$mid.",".$tipo.");' href='#'>X</a></td>
 								<td><a target='_blank' class='links' href='http://en.wikipedia.org/wiki/Special:Search?search=".$mtitle."&go=Go'>$mtitle</a></td>
 								<td><a target='_blank' class='links' href='http://en.wikipedia.org/wiki/Special:Search?search=".$msrc."&go=Go'>$msrc</a></td>
 								<td class='c'><a target='_blank' href='http://www.youtube.com/results?search_query=$mtitle+$msrc'><img class='songs' src='images/youtube.jpg' /></a></td>
@@ -154,7 +153,8 @@
 
 			<div id="mynotes">
 				<?
-						$qnotes = mysql_query("SELECT * FROM `mystuff` WHERE `type` = 'notes' ORDER BY `id` DESC");
+					$tipo = "\"n\"";
+					$qnotes = mysql_query("SELECT * FROM `mystuff` WHERE `type` = 'notes' ORDER BY `id` DESC");
 						if(mysql_num_rows($qnotes)==0)
 							echo "Go to the (+) tab and add some notes!";
 						while ($row = mysql_fetch_assoc($qnotes)) {
@@ -167,7 +167,7 @@
 
 							echo "
 							<div class='notesTitle' id='txt$nid'>
-							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid);'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
+							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del(".$nid.",".$tipo.");'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
 							</div>
 							<div class='notesContent' id='txt".$nid."content' style='visibility: hidden; height:0px;'>$nsrc</div>
 							";
