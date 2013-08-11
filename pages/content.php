@@ -87,10 +87,11 @@
 						$uid 	= $row['id'];
 						$utitle = $row['title'];
 						$usrc	= $row['src'];
-						$t 		= "u";
+						$t = "u";
+
 						echo "
 						<div>
-							<a style='color:red;text-decoration:none;background:#EBEBEB;padding: 0px 5px 0px 5px; -webkit-border-radius:100px;' onclick='del($uid, $t)' href='#'>x</a> <a class='links' href=$usrc>$utitle</a>
+							<a style='color:red;text-decoration:none;background:#EBEBEB;padding: 0px 5px 0px 5px; -webkit-border-radius:100px;' onclick='del($uid);' href='#'>x</a> <a class='links' href=$usrc>$utitle</a>
 						</div>";
 					}
 				?>
@@ -110,6 +111,8 @@
 					</tr>
 					<?
 						$x = 1;
+						$t = 'm';
+
 						if($_GET['sort']=="m" && $_GET['item']=="t")
 							$qmusic = mysql_query("SELECT * FROM `mystuff` WHERE `type` = 'mp3' ORDER BY `title` ASC");
 						else if($_GET['sort']=="m" && $_GET['item']=="a")
@@ -124,7 +127,6 @@
 							$mid 	= $row['id'];
 							$mtitle = $row['title'];
 							$msrc	= $row['src'];
-							$t = "m";
 
 							$x = ($x==1)? 0: 1;
 							$color = ($x==0)? "#EBEBEB": "white";
@@ -134,7 +136,7 @@
 							else
 								echo "<tr style='background:#fff;'>";
 							echo "
-								<td class='c'><a style='color:red;text-decoration:none;background:".$color.";padding:0px 10px 0px 10px; -webkit-border-radius:100px;' onclick='del($mid, $t);' href='#'>X</a></td>
+								<td class='c'><a style='color:red;text-decoration:none;background:".$color.";padding:0px 10px 0px 10px; -webkit-border-radius:100px;' onclick='del($mid);' href='#'>X</a></td>
 								<td><a target='_blank' class='links' href='http://en.wikipedia.org/wiki/Special:Search?search=".$mtitle."&go=Go'>$mtitle</a></td>
 								<td><a target='_blank' class='links' href='http://en.wikipedia.org/wiki/Special:Search?search=".$msrc."&go=Go'>$msrc</a></td>
 								<td class='c'><a target='_blank' href='http://www.youtube.com/results?search_query=$mtitle+$msrc'><img class='songs' src='images/youtube.jpg' /></a></td>
@@ -165,7 +167,7 @@
 
 							echo "
 							<div class='notesTitle' id='txt$nid'>
-							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid, $t)'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
+							<div class='ntstitle' onclick='display($nid);'>$ntitle </div><div class='ntshide' onclick='away($nid)'>[hide]</div><div class='ntsdel' onclick='del($nid);'>[delete]</div><div onclick='display($nid);' class='ntsdate'>$fecha</div>
 							</div>
 							<div class='notesContent' id='txt".$nid."content' style='visibility: hidden; height:0px;'>$nsrc</div>
 							";
