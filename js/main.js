@@ -49,7 +49,7 @@ $(document).ready(function(){
 		});
 	}else {
 
-
+	$('#mobilemenu').remove();
 
 	$('#urls').click(function(){
 		hideAll("urls");
