@@ -1,2 +1,6 @@
 connect.php
 .DS_Store
+login.php
+logout.php
+del.php
+add.php
