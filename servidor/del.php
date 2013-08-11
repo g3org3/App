@@ -5,20 +5,19 @@
 if($_POST['deleted']){
 	
 	$id 	= $_POST['id'];
-	$type 	= $_POST['typee'];
+	$tipo	= $_POST['tipo'];
 
 	require('connect.php');
 
 	if($q = mysql_query("DELETE FROM `mystuff` WHERE `id` = '$id'")){
-		//$data['message'] = "success";
-		//$data['tipo'] = $type;
-		$data = "success";
-	} else
-		//$data['message'] = "fail";
-		//$data['tipo']	= "none";
-		$data="fail";
+		$data['message']= "success";
+		$data['tipo']	= $tipo;
+	} else{
+		$data['message']= "fail";
+		$data['tipo']	= "none";
 	}
-	echo ($data);
+
+	echo json_encode($data);
 
 
 } else {
