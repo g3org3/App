@@ -56,12 +56,25 @@
 	<body>
 	<div id='messages'><? echo $message?></div>
 	<div id='header'></div>
+	<div id="mobilemenu">
+				<div id='logo'>&and;</div>
+				<div id='urls'>Links</div>
+				<div id='music'>Music</div>
+				<div id='notes'>Notes</div>
+				<div id='images' style='text-decoration: line-through;'>Images</div>
+				<div id='add'>+</div>
+				<div id='logout'>-</div>
+	</div>
 		<div id="nav">
-			<div style="position:fixed;top:0px;"><a id='off' href="#">&and;</a><a id='onn' href="#">&or;</a></div>
+			<div style="position:fixed;top:0px;left:100%;margin-left:-200px;"><a id='off' href="#">&and;</a><a id='onn' href="#">&or;</a></div>
 			<div id="menu">
 				<a class='tabs' href='../url/' id='logo'>&bull;</a><a class='tabs' href='#' id='urls'>Links</a><a class='tabs' href='#' id='music'>Music</a><a class='tabs' href='#' id='notes'>Notes</a><a class='tabs' href='#' id='images' style='text-decoration: line-through;'>Images</a><a class='tabs' href="#" id='add'>+</a><a class='tabs' href="#" id='logout'>-</a>
 			</div>
+			
+			<div id="active" style="cursor:pointer;white-space:pre;font-size: 1em; background:#EBEBEB;text-align:center;">&or;</div>
+			
 			<div id='space'></div>
+			
 			<div id="myadd">
 				<form action='servidor/add.php' method='post'>
 					<input name='title' class="txt" placeholder='Title' /><br>
